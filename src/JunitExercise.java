@@ -11,6 +11,11 @@ import java.lang.annotation.Target;
     public boolean skip() default false;
 }
 
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@interface BeforeAll {
+}
+
 class TestedClass {
     String gosho = "Gosho";
 
@@ -81,6 +86,12 @@ class TestExample {
         assertionLibrary.assumeTrue(mocked.someMethodThatReturnString().contains("G"));
         assertionLibrary.fail("this will always fail");
     }
+
+    @BeforeAll
+    void beforeAllSection()
+    {
+        System.out.println("This should be runned before test suite  test");
+    }
 }
 
 class Assetions {
@@ -119,16 +130,38 @@ class RunTest {
         TestExample testSuiteToRun = new TestExample();
 
         Class testSuiteToRunReflection = testSuiteToRun.getClass();
+        // check for before each and after each annotations
+        Method beforeAllMethod = null;
+        boolean shouldRunBeforeAllMethod = false;
+        Method afterAllMethod = null;
+        boolean shouldRunAfterAllMethod = false;
 
-        // iterate over class methods
         for (Method method : testSuiteToRunReflection.getDeclaredMethods())
-            if(method.isAnnotationPresent(Test.class))
+        {
+            if (method.isAnnotationPresent(BeforeAll.class)) {
+                shouldRunBeforeAllMethod = true;
+                beforeAllMethod = method;
+            } else if(method.isAnnotationPresent(BeforeAll.class))
             {
-                Annotation annotation = method.getAnnotation(Test.class);
-                Test test = (Test)annotation;
+                shouldRunAfterAllMethod = true;
+                afterAllMethod = method;
+            }
+        }
+        // iterate over class methods
+        for (int i = 0; i < testSuiteToRunReflection.getDeclaredMethods().length; i++) {
+            // check if it is first run and should run BeforeAll method
+            if (i == 0 && shouldRunBeforeAllMethod && beforeAllMethod != null)
+            {
+                beforeAllMethod.invoke(testSuiteToRunReflection.newInstance());
+            }
+            Method method = testSuiteToRunReflection.getDeclaredMethods()[i];
 
-                if (!test.skip())
-                {
+            if (method.isAnnotationPresent(Test.class)) {
+                Annotation testAnnotation = method.getAnnotation(Test.class);
+
+                Test test = (Test) testAnnotation;
+
+                if (!test.skip()) {
                     try {
                         method.invoke(testSuiteToRunReflection.newInstance());
                         System.out.printf("%s - Test '%s' - passed %n", ++count, method.getName());
@@ -141,6 +174,9 @@ class RunTest {
                     ignore++;
                 }
             }
-        System.out.printf("%nResult : Total : %d, Passed: %d, Failed %d, Ignore %d%n", count, passed, failed, ignore);
+            if (i == testSuiteToRunReflection.getDeclaredMethods().length - 1) {
+                System.out.printf("%nResult : Total : %d, Passed: %d, Failed %d, Ignore %d%n", count, passed, failed, ignore);
+            }
+        }
     }
 }
