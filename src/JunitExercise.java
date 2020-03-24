@@ -16,6 +16,12 @@ import java.lang.annotation.Target;
 @interface BeforeAll {
 }
 
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@interface AfterAll {
+}
+
+
 class TestedClass {
     String gosho = "Gosho";
 
@@ -92,6 +98,12 @@ class TestExample {
     {
         System.out.println("This should be runned before test suite  test");
     }
+
+    @AfterAll
+    void AfterAllSection()
+    {
+        System.out.println("This should be runned after test suite  test");
+    }
 }
 
 class Assetions {
@@ -141,12 +153,12 @@ class RunTest {
             if (method.isAnnotationPresent(BeforeAll.class)) {
                 shouldRunBeforeAllMethod = true;
                 beforeAllMethod = method;
-            } else if(method.isAnnotationPresent(BeforeAll.class))
-            {
+            } else if(method.isAnnotationPresent(AfterAll.class)) {
                 shouldRunAfterAllMethod = true;
                 afterAllMethod = method;
             }
         }
+
         // iterate over class methods
         for (int i = 0; i < testSuiteToRunReflection.getDeclaredMethods().length; i++) {
             // check if it is first run and should run BeforeAll method
@@ -175,6 +187,12 @@ class RunTest {
                 }
             }
             if (i == testSuiteToRunReflection.getDeclaredMethods().length - 1) {
+
+                if (shouldRunAfterAllMethod && afterAllMethod != null)
+                {
+                    afterAllMethod.invoke(testSuiteToRunReflection.newInstance());
+                }
+
                 System.out.printf("%nResult : Total : %d, Passed: %d, Failed %d, Ignore %d%n", count, passed, failed, ignore);
             }
         }
