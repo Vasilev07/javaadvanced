@@ -17,6 +17,10 @@ class TestedClass {
     public String someMethodThatReturnString() {
         return this.gosho;
     }
+
+    public int someSmartMethodThatReturnZero() {
+        return 0;
+    }
 }
 
 class TestExample {
@@ -25,34 +29,82 @@ class TestExample {
 
     // should fail because we are returning Gosho from tested Class
     @Test
-    void testA() {
-        assertionLibrary.assertEqualStrings("NotGosho", mocked.someMethodThatReturnString());
+    void testA()
+    {
+        assertionLibrary.assertEquals("NotGosho", mocked.someMethodThatReturnString());
     }
 
     // should pass because we are returning Gosho from tested Class
     @Test
-    void testB() {
-        assertionLibrary.assertEqualStrings("Gosho", mocked.someMethodThatReturnString());
+    void testB()
+    {
+        assertionLibrary.assertEquals("Gosho", mocked.someMethodThatReturnString());
     }
 
     // should be skipped
     @Test(skip = true)
-    void testC() {
+    void testC()
+    {
 
+    }
+
+    // should fail because we are expecting 1 to equal 0
+    @Test
+    void testSomeSmartMethodThatReturnZeroFail()
+    {
+        assertionLibrary.assertEquals(1, mocked.someSmartMethodThatReturnZero());
+    }
+
+    // should pass because we are expecting 0 to equal 0
+    @Test
+    void testSomeSmartMethodThatReturnZeroPass()
+    {
+        assertionLibrary.assertEquals(0, mocked.someSmartMethodThatReturnZero());
+    }
+
+    // should fail because passed falue is true
+    @Test
+    void testIfAssumeTrueFail()
+    {
+        assertionLibrary.assumeTrue(mocked.someMethodThatReturnString().contains("T"));
+    }
+
+    @Test
+    void testIfAssumeTruePass()
+    {
+        assertionLibrary.assumeTrue(mocked.someMethodThatReturnString().contains("G"));
+    }
+
+    @Test
+    void testIfFailFail()
+    {
+        assertionLibrary.assumeTrue(mocked.someMethodThatReturnString().contains("G"));
+        assertionLibrary.fail("this will always fail");
     }
 }
 
 class Assetions {
-    public void assertEqualIntegers(int value, int methodResult) {
+    public void assertEquals(int value, int methodResult) {
         if (value != methodResult) {
-            throw new RuntimeException("Expected value is not equla to result");
+            throw new RuntimeException("Expected value is not equal to result");
         }
     }
 
-    public void assertEqualStrings(String value, String methodResult) {
+    public void assertEquals(String value, String methodResult) {
         if (value != methodResult) {
-            throw new RuntimeException("Expected value is not equla to result");
+            throw new RuntimeException("Expected value is not equal to result");
         }
+    }
+
+    public void assumeTrue(boolean value) {
+        if (!value) {
+            throw new RuntimeException("Expected value is not equal to true");
+        }
+    }
+
+    public void fail(String errorMessage)
+    {
+        throw new RuntimeException(errorMessage);
     }
 }
 
@@ -64,10 +116,12 @@ class RunTest {
         int count = 0;
         int ignore = 0;
 
-        Class<TestExample> tests = TestExample.class;
+        TestExample testSuiteToRun = new TestExample();
+
+        Class testSuiteToRunReflection = testSuiteToRun.getClass();
 
         // iterate over class methods
-        for (Method method : tests.getDeclaredMethods())
+        for (Method method : testSuiteToRunReflection.getDeclaredMethods())
             if(method.isAnnotationPresent(Test.class))
             {
                 Annotation annotation = method.getAnnotation(Test.class);
@@ -76,7 +130,7 @@ class RunTest {
                 if (!test.skip())
                 {
                     try {
-                        method.invoke(tests.newInstance());
+                        method.invoke(testSuiteToRunReflection.newInstance());
                         System.out.printf("%s - Test '%s' - passed %n", ++count, method.getName());
                         passed++;
                     } catch (Throwable ex) {
