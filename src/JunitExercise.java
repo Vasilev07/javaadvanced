@@ -21,6 +21,15 @@ import java.lang.annotation.Target;
 @interface AfterAll {
 }
 
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@interface BeforeEach {
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@interface AfterEach {
+}
 
 class TestedClass {
     String gosho = "Gosho";
@@ -96,13 +105,25 @@ class TestExample {
     @BeforeAll
     void beforeAllSection()
     {
-        System.out.println("This should be runned before test suite  test");
+        System.out.println("This should be run before test suite test");
     }
 
     @AfterAll
     void AfterAllSection()
     {
-        System.out.println("This should be runned after test suite  test");
+        System.out.println("This should be run after test suite test");
+    }
+
+    @BeforeEach
+    void beforeEachSection()
+    {
+        System.out.println("This should be run before every test test");
+    }
+
+    @AfterEach
+    void afterEachSection()
+    {
+        System.out.println("This should be run after every test test");
     }
 }
 
@@ -148,6 +169,11 @@ class RunTest {
         Method afterAllMethod = null;
         boolean shouldRunAfterAllMethod = false;
 
+        Method beforeEachMethod = null;
+        boolean shouldRunBeforeEachMethod = false;
+        Method afterEachMethod = null;
+        boolean shouldRunAfterEachMethod = false;
+
         for (Method method : testSuiteToRunReflection.getDeclaredMethods())
         {
             if (method.isAnnotationPresent(BeforeAll.class)) {
@@ -156,6 +182,12 @@ class RunTest {
             } else if(method.isAnnotationPresent(AfterAll.class)) {
                 shouldRunAfterAllMethod = true;
                 afterAllMethod = method;
+            } else if(method.isAnnotationPresent(BeforeEach.class)){
+                shouldRunBeforeEachMethod = true;
+                beforeEachMethod = method;
+            } else if(method.isAnnotationPresent(AfterEach.class)) {
+                shouldRunAfterEachMethod = true;
+                afterEachMethod = method;
             }
         }
 
@@ -174,6 +206,10 @@ class RunTest {
                 Test test = (Test) testAnnotation;
 
                 if (!test.skip()) {
+                    if (shouldRunBeforeEachMethod && beforeEachMethod != null) {
+                        beforeEachMethod.invoke(testSuiteToRunReflection.newInstance());
+                    }
+
                     try {
                         method.invoke(testSuiteToRunReflection.newInstance());
                         System.out.printf("%s - Test '%s' - passed %n", ++count, method.getName());
@@ -181,6 +217,10 @@ class RunTest {
                     } catch (Throwable ex) {
                         System.out.printf("%s - Test '%s' - failed: %s %n", ++count, method.getName(), ex.getCause());
                         failed++;
+                    }
+
+                    if (shouldRunAfterEachMethod && afterEachMethod != null) {
+                        afterEachMethod.invoke(testSuiteToRunReflection.newInstance());
                     }
                 } else {
                     ignore++;
