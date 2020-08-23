@@ -8,7 +8,7 @@ public class MusicStudio {
     private int currentMoneyCollectedInLv = 0;
     private int price = 20;
 
-    public void constructor(String name) {
+    public void MusicStudio(String name) {
         this.name = name;
     }
 

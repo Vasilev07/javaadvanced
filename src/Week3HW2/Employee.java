@@ -5,7 +5,7 @@ public class Employee {
     private String title;
     private int age;
 
-    public void constructor(String name, int age, String title) {
+    public void Employee(String name, int age, String title) {
         this.name = name;
         this.age = age;
         this.title = title;
