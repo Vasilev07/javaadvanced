@@ -20,10 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd1e98d0-2395-44c2-af69-7625269c949f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Week4HW3/ElectricalTool.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Week4HW3/Cooker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Week4HW3/CookerType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Week4HW3/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Week4HW3/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Week4HW3/Manufacturer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Week3HW2/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Week3HW2/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Week3HW2/MusicStudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Week3HW2/MusicStudio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JavaExercises/Week3HW2/MusicStudio.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JavaExercises/Week3HW2/MusicStudio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Week4HW3/ElectricalTool.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +38,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -48,6 +54,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -58,7 +65,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Week3HW2.Main" />
+      <option name="MAIN_CLASS_NAME" value="Week4HW3.Main" />
       <module name="JavaExercises" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -105,40 +112,52 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="220" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598123331324">
+    <state x="220" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598177770970">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="220" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.1080.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598123331324" />
-    <state x="571" y="130" key="#com.intellij.ide.util.MemberChooser" timestamp="1598124957312">
+    <state x="220" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598177770970" />
+    <state x="571" y="130" key="#com.intellij.ide.util.MemberChooser" timestamp="1598424477954">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="571" y="130" key="#com.intellij.ide.util.MemberChooser/0.1080.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598124957312" />
-    <state x="495" y="219" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1598123299548">
+    <state x="571" y="130" key="#com.intellij.ide.util.MemberChooser/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598424477954" />
+    <state x="495" y="219" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1598177769762">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="495" y="219" key="#com.intellij.ide.util.TreeClassChooserDialog/0.1080.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598123299548" />
+    <state x="495" y="219" key="#com.intellij.ide.util.TreeClassChooserDialog/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598177769762" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1598178103970">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598178103970" />
     <state x="546" y="184" key="FileChooserDialogImpl" timestamp="1598123163776">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="546" y="184" key="FileChooserDialogImpl/0.1080.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598123163776" />
-    <state width="1344" height="195" key="GridCell.Tab.0.bottom" timestamp="1598125045413">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1598178458429">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1344" height="195" key="GridCell.Tab.0.bottom/0.1080.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598125045413" />
-    <state width="1344" height="195" key="GridCell.Tab.0.center" timestamp="1598125045412">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598178458429" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1598178458429">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1344" height="195" key="GridCell.Tab.0.center/0.1080.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598125045412" />
-    <state width="1344" height="195" key="GridCell.Tab.0.left" timestamp="1598125045410">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598178458429" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1598178458429">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1344" height="195" key="GridCell.Tab.0.left/0.1080.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598125045410" />
-    <state width="1344" height="195" key="GridCell.Tab.0.right" timestamp="1598125045413">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598178458429" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1598178458429">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1344" height="195" key="GridCell.Tab.0.right/0.1080.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598125045413" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598178458429" />
     <state x="246" y="0" key="SettingsEditor" timestamp="1598123255591">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -147,5 +166,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="408" y="65" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.1080.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598124273563" />
+    <state x="477" y="0" width="581" height="824" key="find.popup" timestamp="1598423479146">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="477" y="0" width="581" height="824" key="find.popup/1920.0.1536.824/0.0.1536.824@0.0.1536.824" timestamp="1598423479146" />
   </component>
 </project>
